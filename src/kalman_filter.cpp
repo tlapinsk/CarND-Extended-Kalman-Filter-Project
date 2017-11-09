@@ -64,13 +64,12 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   //pre-compute a set of terms to avoid repeated calculation
   float c1 = sqrt(px*px+py*py);
   //check division by zero
-  if(fabs(c1) < 0.0001){
-    cout << "CalculateJacobian () - Error - Division by Zero" << endl;
+  if(c1 < 0.0001){
     px += .001;
     py += .001;
     c1 = sqrt(px * px + py * py);
   }
-  float c2 = atan2(py, px)
+  float c2 = atan2(py, px);
   float c3 = (px*px+py*py)/c1;
 
   VectorXd H_func(3);
