@@ -1,7 +1,10 @@
 #include "kalman_filter.h"
+#include <iostream>
+#define PI 3.14159265
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
+using namespace std;
 
 // Please note that the Eigen library does not initialize 
 // VectorXd or MatrixXd objects with zeros upon creation.
@@ -61,21 +64,43 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   float vx = x_(2);
   float vy = x_(3);
 
-  //pre-compute a set of terms to avoid repeated calculation
-  float c1 = sqrt(px*px+py*py);
-  //check division by zero
-  if(c1 < 0.0001){
-    px += .001;
-    py += .001;
-    c1 = sqrt(px * px + py * py);
+  float phi = 0.0;
+  float rho_dot = 0.0;
+
+  //Convert to polar
+  float rho = sqrt(px*px+py*py);
+  if(fabs(rho) < 0.0001){
+    rho = 0.0001;
   }
-  float c2 = atan2(py, px);
-  float c3 = (px*vx+py*vy)/c1;
+
+  // Avoid division by zero
+  if(fabs(px) < 0.0001){
+    cout << "Error while converting vector x_ to polar coordinates: Division by Zero" << endl;
+  }
+  else {
+    phi = atan2(py, px);
+  }
+
+  // Avoid division by zero
+  if (rho < 0.0001) {
+    cout << "Error while converting vector x_ to polar coordinates: Division by Zero" << endl;
+  }
+  else {
+    rho_dot = (px*vx + py*vy) / rho;
+  }
 
   VectorXd H_func(3);
-  H_func << c1, c2, c3;
-
+  H_func << rho, phi, rho_dot;
   VectorXd y = z - H_func;
+
+  // Apply angle normalization AFTER comparing prediction with sensor data y = z - H_func
+  while (y(1)>PI) {
+    y(1) -= 2 * PI;
+  }
+  while (y(1)<-PI) {
+    y(1) += 2 * PI;
+  }
+
   MatrixXd Ht = H_.transpose();
   MatrixXd S = H_ * P_ * Ht + R_;
   MatrixXd Si = S.inverse();
