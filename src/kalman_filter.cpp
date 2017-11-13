@@ -92,8 +92,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   H_func << rho, phi, rho_dot;
   VectorXd y = z - H_func;
 
-  //normalize
   //not the preferred method for normalization, but it works
+  //shoutout to Albert_K for posting his fix for higher than normal RMSE values
+  //normalize
   while (y(1)>PI) {
     y(1) -= 2 * PI;
   }
