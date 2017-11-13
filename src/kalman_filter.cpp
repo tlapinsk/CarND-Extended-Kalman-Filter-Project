@@ -68,12 +68,12 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
   //convert to polar
   float rho = sqrt(px*px+py*py);
-  if(fabs(rho) < 0.0001){
+  if(fabs(rho) < 0.0001) {
     rho = 0.0001;
   }
 
   //avoid division by zero
-  if(fabs(px) < 0.0001){
+  if(fabs(px) < 0.0001) {
     cout << "Error while converting vector x_ to polar coordinates: Division by Zero" << endl;
   }
   else {
