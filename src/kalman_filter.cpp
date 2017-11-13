@@ -93,6 +93,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   VectorXd y = z - H_func;
 
   //normalize
+  //not the preferred method for normalization, but it works
   while (y(1)>PI) {
     y(1) -= 2 * PI;
   }
