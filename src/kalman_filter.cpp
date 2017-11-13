@@ -8,7 +8,6 @@ using namespace std;
 
 // Please note that the Eigen library does not initialize 
 // VectorXd or MatrixXd objects with zeros upon creation.
-
 KalmanFilter::KalmanFilter() {}
 
 KalmanFilter::~KalmanFilter() {}
@@ -67,13 +66,13 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   float phi = 0.0;
   float rho_dot = 0.0;
 
-  //Convert to polar
+  //convert to polar
   float rho = sqrt(px*px+py*py);
   if(fabs(rho) < 0.0001){
     rho = 0.0001;
   }
 
-  // Avoid division by zero
+  //avoid division by zero
   if(fabs(px) < 0.0001){
     cout << "Error while converting vector x_ to polar coordinates: Division by Zero" << endl;
   }
@@ -81,7 +80,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     phi = atan2(py, px);
   }
 
-  // Avoid division by zero
+  //avoid division by zero
   if (rho < 0.0001) {
     cout << "Error while converting vector x_ to polar coordinates: Division by Zero" << endl;
   }
@@ -93,7 +92,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   H_func << rho, phi, rho_dot;
   VectorXd y = z - H_func;
 
-  // Apply angle normalization AFTER comparing prediction with sensor data y = z - H_func
+  //apply angle normalization AFTER comparing prediction with sensor data y = z - H_func
   while (y(1)>PI) {
     y(1) -= 2 * PI;
   }
@@ -112,6 +111,4 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   long x_size = x_.size();
   MatrixXd I = MatrixXd::Identity(x_size, x_size);
   P_ = (I - K * H_) * P_;
-
-
 }

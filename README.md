@@ -1,9 +1,7 @@
 # Extended-Kalman-Filter
-Udacity CarND Term 2, Project 1 - Extended Kalman Filters
-
-## Project Info
 In this project, I used C++ to write a program that processes Lidar and Radar data to track / predict object positioning via an Extended Kalman Filter. 
 
+## Project Info
 For a quick tutorial on Kalman Filters, I recommend the following [here](http://www.ilectureonline.com/lectures/subject/SPECIAL%20TOPICS/26/190).
 
 Kalman filters offer a great way to make a prediction about the position and speed of an object based on historic data (one time step backwards). To see the implementation please visit the following three files in the 'src' folder:
@@ -35,10 +33,10 @@ My Extended Kalman Filter produced the below results. 'px' is the x-position, 'p
 |  vy   | 0.4399  |
 
 
-![Visualization]( "Visualization")
+![Visualization](https://github.com/tlapinsk/CarND-Extended-Kalman-Filter-Project/blob/master/output/results.png?raw=true "Visualization")
 
 ## Resources
-Below are resources and helpful links that I used to complete this project.
+Most of my code is pulled from the Udacity introduction to Extended Kalman Filters within the SDCND. Below are further resources and helpful links that I used to complete this project:
 
 - [Normalization in Kalman.cpp](https://discussions.udacity.com/t/ekf-radar-causes-rmse-to-go-through-the-roof/243944/5?u=tim.lapinskas)
 - [Radar updates](https://discussions.udacity.com/t/radar-updates-are-messing-up/281342/3)
