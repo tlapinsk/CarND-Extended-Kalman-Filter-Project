@@ -92,7 +92,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   H_func << rho, phi, rho_dot;
   VectorXd y = z - H_func;
 
-  //apply angle normalization
+  //normalize
   while (y(1)>PI) {
     y(1) -= 2 * PI;
   }
