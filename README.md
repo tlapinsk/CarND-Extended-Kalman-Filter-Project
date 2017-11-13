@@ -36,7 +36,7 @@ My Extended Kalman Filter produced the below results. 'px' is the x-position, 'p
 ![Visualization](https://github.com/tlapinsk/CarND-Extended-Kalman-Filter-Project/blob/master/output/results.png?raw=true "Visualization")
 
 ## Resources
-Most of my code is pulled from the Udacity introduction to Extended Kalman Filters within the SDCND. Below are further resources and helpful links that I used to complete this project:
+Most of my code is pulled from Udacity's introduction to Extended Kalman Filters within the SDCND course material. Below are further resources and helpful links that I used to complete this project:
 
 - [Normalization in Kalman.cpp](https://discussions.udacity.com/t/ekf-radar-causes-rmse-to-go-through-the-roof/243944/5?u=tim.lapinskas)
 - [Radar updates](https://discussions.udacity.com/t/radar-updates-are-messing-up/281342/3)
